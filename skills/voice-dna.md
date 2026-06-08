@@ -2,7 +2,7 @@
 # Voice DNA
 
 ## Sources
--  Ole Lehmann @itsolelehmann
+-  Author: Ole Lehmann @itsolelehmann at twitter
 
 ## Writing Rules
 - Write like a sharp human, not a language model.
