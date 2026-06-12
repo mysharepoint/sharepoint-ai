@@ -1,0 +1,336 @@
+﻿<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grauer-Kasten-Skill – Installation und Architektur</title>
+  <style>
+    :root {
+      --ms-blue: #0067b8;
+      --text: #242424;
+      --muted: #616161;
+      --line: #d9d9d9;
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --soft: #f2f2f2;
+      --code: #1f1f1f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #eef5fb 0%, var(--bg) 180px, #ffffff 100%);
+      line-height: 1.65;
+    }
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 24px 64px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #ffffff 0%, #f7fbff 100%);
+      border: 1px solid #dce8f5;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.06);
+      margin-bottom: 28px;
+    }
+    .logo {
+      width: 120px;
+      margin-bottom: 22px;
+      display: block;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.08;
+      font-weight: 300;
+      letter-spacing: -.02em;
+    }
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 24px;
+      align-items: start;
+      margin-bottom: 28px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid #e7ebf0;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 10px 26px rgba(0,0,0,.04);
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ms-blue);
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: 1.45rem;
+      line-height: 1.2;
+      margin: 0 0 14px;
+      font-weight: 600;
+    }
+    h3 {
+      font-size: 1.08rem;
+      margin: 22px 0 10px;
+      font-weight: 600;
+      color: #1f1f1f;
+    }
+    p { margin: 0 0 14px; }
+    ul, ol { margin: 0 0 16px 1.2rem; padding: 0; }
+    li { margin: 0 0 8px; }
+    .soft-box {
+      background: var(--soft);
+      border-radius: 18px;
+      padding: 18px 20px;
+      margin: 18px 0;
+    }
+    .soft-box strong {
+      color: #111;
+    }
+    .path-list code, code.inline {
+      background: #eef3f7;
+      color: #0f1720;
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-size: .94em;
+    }
+    pre {
+      margin: 14px 0 0;
+      padding: 18px;
+      border-radius: 16px;
+      background: var(--code);
+      color: #f5f7fa;
+      overflow: auto;
+      font-size: .92rem;
+      line-height: 1.5;
+    }
+    .section {
+      background: var(--card);
+      border: 1px solid #e7ebf0;
+      border-radius: 20px;
+      padding: 26px;
+      box-shadow: 0 10px 26px rgba(0,0,0,.04);
+      margin-bottom: 22px;
+    }
+    .callout {
+      border-left: 4px solid var(--ms-blue);
+      background: #f4f9fd;
+      border-radius: 0 16px 16px 0;
+      padding: 14px 16px;
+      margin: 16px 0;
+      color: #234;
+    }
+    .checklist li::marker,
+    .numbered li::marker {
+      color: var(--ms-blue);
+      font-weight: 700;
+    }
+    .footer {
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: .95rem;
+      text-align: center;
+    }
+    a { color: var(--ms-blue); text-decoration: underline; }
+    @media (max-width: 840px) {
+      .grid { grid-template-columns: 1fr; }
+      .hero, .card, .section { padding: 20px; border-radius: 18px; }
+      .page { padding: 20px 14px 40px; }
+      .logo { width: 104px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <img  alt="Microsoft Logo" class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANgAAAAuCAYAAABK69fpAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTMyIDc5LjE1OTI4NCwgMjAxNi8wNC8xOS0xMzoxMzo0MCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QTAwQkM2Mzk4NDBBMTFFNjhDQkVCOTdDMjE1NkM3RkQiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QTAwQkM2Mzg4NDBBMTFFNjhDQkVCOTdDMjE1NkM3RkQiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUuNSAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBMkM5MzFBNDcwQTExMUU2QUVERkExNDU3ODU1M0I3QiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBMkM5MzFBNTcwQTExMUU2QUVERkExNDU3ODU1M0I3QiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgQJy/MAAAxESURBVHja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" data-description="Microsoft Logo für die Dokumentation des Grauer-Kasten-Skills">
+      <div class="eyebrow">Skill-Dokumentation</div>
+      <h1>Grauer-Kasten-Skill</h1>
+      <p class="subtitle">Installationsanleitung, Architektur, Hintergedanke und technische Umsetzung der Lösung zur Überführung einer englischsprachigen Microsoft-Originalnews in eine deutschsprachige Pressemitteilung mit eigenem HTML-/PDF-Design und separatem Logo-Asset.</p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <div class="eyebrow">Zweck</div>
+        <h2>Was der Skill macht</h2>
+        <p>Der Skill <code class="inline">grauer-kasten</code> erzeugt aus einer englischsprachigen Microsoft-Originalmeldung eine deutschsprachige Pressemitteilung und wendet danach automatisch ein definiertes visuelles Layout an. Das Ergebnis wird als HTML und zusätzlich als PDF ausgegeben.</p>
+        <div class="soft-box">
+          <strong>Kernprinzip:</strong> Erst wird der Inhalt aus dem Original präzise ins Deutsche übertragen. Danach wird eine separate Gestaltungsschicht angewendet. So bleiben Inhalt, Struktur und Design sauber voneinander getrennt.
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Hintergedanke</div>
+        <h2>Warum die Lösung so aufgebaut ist</h2>
+        <ol class="numbered">
+          <li><strong>Inhaltsebene:</strong> Aus einer amerikanischen bzw. englischsprachigen Microsoft-Originalnews wird eine sachliche deutsche Pressemitteilung erzeugt.</li>
+          <li><strong>Gestaltungsebene:</strong> Danach wird dieser fertige Inhalt in das definierte <code class="inline">grauer-kasten</code>-Design überführt.</li>
+        </ol>
+        <p>Der Vorteil: Die Übersetzung bleibt kontrollierbar, das Layout separat wartbar und dieselbe Designlogik kann später auch für weitere Pressemeldungen wiederverwendet werden.</p>
+      </article>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow">Struktur</div>
+      <h2>Aufbau des Skills in SharePoint</h2>
+      <pre>Skills/
+└─ grauer-kasten/
+   ├─ SKILL.md
+   ├─ assets/
+   │  └─ MS LOGO.png
+   └─ preferences/
+      └─ pm-de-grauer-kasten/
+         └─ SKILL.md</pre>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow">Bausteine</div>
+      <h2>Rolle der einzelnen Bestandteile</h2>
+      <h3>1. <code class="inline">grauer-kasten/SKILL.md</code></h3>
+      <p>Das ist der Hauptskill. Er definiert den fachlichen Zweck, die Struktur der deutschen Pressemitteilung, die Stilregeln, den verpflichtenden Ablauf und die nachgelagerte Anwendung des Design-Skills.</p>
+      <p>Der Hauptskill sorgt also dafür, dass aus dem englischen Original ein sauber strukturierter deutscher PM-Text wird.</p>
+
+      <h3>2. <code class="inline">grauer-kasten/preferences/pm-de-grauer-kasten/SKILL.md</code></h3>
+      <p>Das ist die Gestaltungsschicht. Sie definiert Typografie, Breite der Textspalte, den grauen Kasten, Linkfarbe, Position des Logos und die Pflicht, HTML und PDF zu erzeugen.</p>
+      <p>Diese Datei verändert nicht die Aussage des Inhalts, sondern nur dessen visuelle Umsetzung.</p>
+
+      <h3>3. <code class="inline">grauer-kasten/assets/MS LOGO.png</code></h3>
+      <p>Dieses Asset enthält das Microsoft-Logo. Es wird oberhalb der Überschrift eingebunden und bewusst separat gehalten, damit das Branding austauschbar bleibt und nicht hart im HTML verankert werden muss.</p>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow">Inhalt</div>
+      <h2>Inhaltliche Umsetzung</h2>
+      <p>Der Hauptskill verlangt für die deutsche Pressemitteilung exakt diese Struktur:</p>
+      <ol class="numbered">
+        <li>Überschrift</li>
+        <li>Thematischer Untertitel</li>
+        <li>Einleitungsabsatz</li>
+        <li>Bulletliste mit „Die wichtigsten Neuigkeiten im Überblick:“</li>
+        <li>Abschluss-Link zum englischen Original</li>
+      </ol>
+      <div class="callout">Zusätzlich gelten klare Schreibregeln: sachlich statt werblich, keine erfundenen Inhalte, keine Übertreibungen, Produktnamen und Fachbegriffe bleiben auf Englisch und es gibt keinen freien Schlussabsatz außerhalb des Quellenlinks.</div>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow">Design</div>
+      <h2>Design-Umsetzung</h2>
+      <p>Nach der inhaltlichen Erstellung greift der Design-Skill. Er beschreibt den Zielstil so:</p>
+      <div class="soft-box">
+        <ul class="checklist">
+          <li><strong>Schrift:</strong> <code class="inline">Segoe UI</code>, systemnahe Sans-Serif-Fallbacks</li>
+          <li><strong>Headline:</strong> groß, dünn, linksbündig, dunkelgrau</li>
+          <li><strong>Textspalte:</strong> schmal, max. 660 px, zentriert</li>
+          <li><strong>Grauer Kasten:</strong> Hintergrund <code class="inline">#f2f2f2</code></li>
+          <li><strong>Bullets:</strong> mit fettem Lead-in</li>
+          <li><strong>Links:</strong> Microsoft-Blau <code class="inline">#0067b8</code>, unterstrichen</li>
+          <li><strong>Logo:</strong> oben sichtbar eingebunden</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow">Quelle zu Ausgabe</div>
+      <h2>Warum die amerikanische Originalnews zuerst kommt</h2>
+      <p>Der Ausgangspunkt ist bewusst die englischsprachige Originalmeldung von Microsoft. Das Original ist die primäre Quelle. Die deutsche Fassung soll keine freie Nacherzählung sein, sondern inhaltlich nah am Original bleiben und gleichzeitig in eine für Pressemitteilungen passende Struktur gebracht werden.</p>
+      <div class="callout"><strong>Kurzform:</strong> erst Quelle verstehen, dann sauber übertragen, dann gestalten.</div>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow">Ablauf</div>
+      <h2>Technischer Workflow bei der Nutzung</h2>
+      <ol class="numbered">
+        <li>Nutzer liefert URL oder Rohtext einer englischsprachigen Microsoft-Originalmeldung.</li>
+        <li>Der Hauptskill analysiert Kernaussage, Produkte, Funktionen, Anlass und Kontext.</li>
+        <li>Daraus wird eine deutsche Pressemitteilung in der vorgegebenen Struktur erzeugt.</li>
+        <li>Danach wird automatisch <code class="inline">preferences/pm-de-grauer-kasten/SKILL.md</code> als Designvorgabe angewendet.</li>
+        <li>Das Microsoft-Logo aus <code class="inline">assets/MS LOGO.png</code> wird eingebunden.</li>
+        <li>Aus derselben gestalteten Basis wird eine HTML-Datei erzeugt.</li>
+        <li>Zusätzlich wird eine PDF-Datei erzeugt.</li>
+        <li>Beide Dateien werden im Zielordner <code class="inline">/sites/CopilotCenter/MSGrauerKasten/output</code> gespeichert.</li>
+      </ol>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow">Installation</div>
+      <h2>Installationsanleitung</h2>
+      <h3>Variante A: Auf derselben Site nachbauen</h3>
+      <ol class="numbered path-list">
+        <li>Öffne die Dokumentbibliothek <code class="inline">AgentAssets</code> und dort den Ordner <code class="inline">Skills</code>.</li>
+        <li>Lege einen Ordner <code class="inline">grauer-kasten</code> an.</li>
+        <li>Lege darin die Datei <code class="inline">SKILL.md</code> für den Hauptskill an.</li>
+        <li>Lege den Unterordner <code class="inline">preferences</code> an.</li>
+        <li>Lege darunter den Ordner <code class="inline">pm-de-grauer-kasten</code> an.</li>
+        <li>Lege dort eine zweite <code class="inline">SKILL.md</code> mit den Designregeln an.</li>
+        <li>Lege zusätzlich den Unterordner <code class="inline">assets</code> an.</li>
+        <li>Lade in <code class="inline">assets</code> die Datei <code class="inline">MS LOGO.png</code> hoch.</li>
+        <li>Stelle sicher, dass im Hauptskill auf <code class="inline">preferences/pm-de-grauer-kasten/SKILL.md</code> und <code class="inline">assets/MS LOGO.png</code> verwiesen wird.</li>
+        <li>Stelle sicher, dass als Ausgabeziel <code class="inline">/sites/CopilotCenter/MSGrauerKasten/output</code> verwendet wird oder passe den Pfad an.</li>
+      </ol>
+
+      <h3>Variante B: In anderer Umgebung übernehmen</h3>
+      <ul class="checklist">
+        <li>gesamten Ordner <code class="inline">grauer-kasten</code> inklusive Unterordner kopieren</li>
+        <li>Zielpfade für Output prüfen</li>
+        <li>sicherstellen, dass die Asset-Datei mit übernommen wird</li>
+        <li>relative Verweise innerhalb des Skills unverändert lassen, sofern die Ordnerstruktur identisch bleibt</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow">Guardrails</div>
+      <h2>Wichtige Regeln</h2>
+      <ul class="checklist">
+        <li>Inhalte dürfen nicht erfunden werden.</li>
+        <li>Das Layout ersetzt nicht die inhaltliche Struktur.</li>
+        <li>Das Logo soll aus dem separaten Asset kommen, nicht als fest codierte Fremdquelle.</li>
+        <li>HTML und PDF gehören zusammen.</li>
+        <li>Erfolg ist erst erreicht, wenn beide Formate erzeugt wurden.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow">Download</div>
+      <h2>Welche Bestandteile gemeinsam mitgenommen werden sollten</h2>
+      <p>Der Skill ist als Ordnerpaket aufgebaut. Für einen Download sollten diese Bestandteile gemeinsam übernommen werden:</p>
+      <ul class="checklist">
+        <li><code class="inline">grauer-kasten/SKILL.md</code></li>
+        <li><code class="inline">grauer-kasten/preferences/pm-de-grauer-kasten/SKILL.md</code></li>
+        <li><code class="inline">grauer-kasten/assets/MS LOGO.png</code></li>
+      </ul>
+      <p>Am einfachsten wird in SharePoint der komplette Ordner <code class="inline">grauer-kasten</code> heruntergeladen oder kopiert. So bleiben Skill-Datei, Design-Skill und Asset zusammen.</p>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow">Zusammenfassung</div>
+      <h2>Modularer Aufbau der Lösung</h2>
+      <div class="soft-box">
+        <ul class="checklist">
+          <li><strong>Quelle:</strong> englische Microsoft-Originalnews</li>
+          <li><strong>Transformation:</strong> deutsche Pressemitteilung</li>
+          <li><strong>Design:</strong> grauer-Kasten-Stil als separate Preference-Schicht</li>
+          <li><strong>Branding:</strong> Logo als eigenes Asset</li>
+          <li><strong>Ausgabe:</strong> HTML und PDF</li>
+        </ul>
+      </div>
+      <p>Dadurch ist die Lösung nachvollziehbar, wartbar und bei Bedarf leicht übertragbar.</p>
+    </section>
+
+    <div class="footer">Erstellt für den Skill-Ordner <strong>grauer-kasten</strong> in der SharePoint-Testumgebung Copilot Center.</div>
+  </main>
+</body>
+</html>
