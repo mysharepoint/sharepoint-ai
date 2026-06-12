@@ -22,7 +22,7 @@ Skills/
 └─ grauer-kasten/
    ├─ SKILL.md
    ├─ assets/
-   │  └─ MS LOGO.png
+   │  └─ acme-logo.png
    └─ preferences/
       └─ pm-de-grauer-kasten/
          └─ SKILL.md
@@ -54,7 +54,7 @@ Sie definiert:
 
 Diese Datei verändert nicht die Aussage des Inhalts, sondern nur dessen visuelle Umsetzung.
 
-### 3. `grauer-kasten/assets/MS LOGO.png`
+### 3. `grauer-kasten/assets/acme-logo.png`
 Dieses Asset enthält das Microsoft-Logo.
 
 Es wird oberhalb der Überschrift eingebunden und bewusst separat gehalten, damit:
@@ -106,7 +106,7 @@ Kurz gesagt: **erst Quelle verstehen, dann sauber übertragen, dann gestalten**.
 2. Der Hauptskill analysiert Kernaussage, Produkte, Funktionen, Anlass und Kontext.
 3. Daraus wird eine deutsche Pressemitteilung in der vorgegebenen Struktur erzeugt.
 4. Danach wird automatisch `preferences/pm-de-grauer-kasten/SKILL.md` als Designvorgabe angewendet.
-5. Das Microsoft-Logo aus `assets/MS LOGO.png` wird eingebunden.
+5. Das Microsoft-Logo aus `assets/acme-logo.png` wird eingebunden.
 6. Aus derselben gestalteten Basis wird eine HTML-Datei erzeugt.
 7. Zusätzlich wird eine PDF-Datei erzeugt.
 8. Beide Dateien werden im Zielordner `/sites/CopilotCenter/MSGrauerKasten/output` gespeichert.
@@ -120,10 +120,10 @@ Kurz gesagt: **erst Quelle verstehen, dann sauber übertragen, dann gestalten**.
 5. Lege darunter den Ordner `pm-de-grauer-kasten` an.
 6. Lege dort eine zweite `SKILL.md` mit den Designregeln an.
 7. Lege zusätzlich den Unterordner `assets` an.
-8. Lade in `assets` die Datei `MS LOGO.png` hoch.
+8. Lade in `assets` die Datei `acme-logo.png` hoch.
 9. Stelle sicher, dass im Hauptskill auf diese beiden Bestandteile verwiesen wird:
    - `preferences/pm-de-grauer-kasten/SKILL.md`
-   - `assets/MS LOGO.png`
+   - `assets/acme-logo.png`
 10. Stelle sicher, dass als Ausgabeziel `/sites/CopilotCenter/MSGrauerKasten/output` verwendet wird oder passe den Pfad auf deine Zielumgebung an.
 
 ### Variante B: In anderer Umgebung übernehmen
@@ -144,7 +144,7 @@ Wenn der Skill in eine andere Site übernommen werden soll:
 Der Skill ist als Ordnerpaket aufgebaut. Für einen Download sollten diese Bestandteile gemeinsam übernommen werden:
 - `grauer-kasten/SKILL.md`
 - `grauer-kasten/preferences/pm-de-grauer-kasten/SKILL.md`
-- `grauer-kasten/assets/MS LOGO.png`
+- `grauer-kasten/assets/acme-logo.png`
 
 Am einfachsten wird in SharePoint der komplette Ordner `grauer-kasten` heruntergeladen oder kopiert. So bleiben Skill-Datei, Design-Skill und Asset zusammen.
 

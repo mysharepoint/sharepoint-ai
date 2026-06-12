@@ -2,7 +2,7 @@
 name: pm-de-grauer-kasten
 description: |
   Legt das visuelle Design einer Microsoft-Source-Pressemitteilung über bereits
-  erstellte Ausgabetexte. Nutzt das Microsoft-Logo aus `assets/MS LOGO.png`,
+  erstellte Ausgabetexte. Nutzt das Microsoft-Logo aus `assets/acme-logo.png`,
   erzeugt immer eine HTML- und eine PDF-Ausgabe und speichert beide Dateien im
   Ordner `/sites/CopilotCenter/MSGrauerKasten/output`.
 cowork:
