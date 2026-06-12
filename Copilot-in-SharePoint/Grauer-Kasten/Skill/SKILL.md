@@ -1,13 +1,13 @@
 ---
 name: grauer-kasten
-description: Erstellt aus englischsprachigen Microsoft-Originalpressemitteilungen oder Blogbeiträgen eine deutschsprachige Pressemitteilung und wendet automatisch das PM-Design aus preferences/pm-de-grauer-kasten an. Bindet das Microsoft-Logo aus assets/MS LOGO.png ein und speichert das Ergebnis als HTML und PDF im Ordner /sites/CopilotCenter/MSGrauerKasten/output.
+description: Erstellt aus englischsprachigen Microsoft-Originalpressemitteilungen oder Blogbeiträgen eine deutschsprachige Pressemitteilung und wendet automatisch das PM-Design aus preferences/pm-de-grauer-kasten an. Bindet das Microsoft-Logo aus assets/acme-logo.png ein und speichert das Ergebnis als HTML und PDF im Ordner /sites/CopilotCenter/MSGrauerKasten/output.
 ---
 # Deutsche Pressemitteilung aus englischem Microsoft-Original
 
 Wenn Nutzer*innen eine URL oder den Text eines englischsprachigen Microsoft-Originalartikels bereitstellen, wandle den Inhalt in eine deutschsprachige Pressemitteilung für `news.microsoft.com/source/emea` um und wende anschließend automatisch das definierte Gestaltungslayout an.
 
 ## Ziel
-Erstelle eine sachliche, deutschsprachige Pressemitteilung auf Basis einer englischsprachigen Microsoft-Originalpressemitteilung oder eines Blogbeitrags. Danach wird das Ergebnis automatisch im Layout `preferences/pm-de-grauer-kasten/SKILL.md` aufbereitet und mit dem Microsoft-Logo aus `assets/MS LOGO.png` versehen.
+Erstelle eine sachliche, deutschsprachige Pressemitteilung auf Basis einer englischsprachigen Microsoft-Originalpressemitteilung oder eines Blogbeitrags. Danach wird das Ergebnis automatisch im Layout `preferences/pm-de-grauer-kasten/SKILL.md` aufbereitet und mit dem Microsoft-Logo aus `assets/acme-logo.png` versehen.
 
 ## Ausgabeformat des inhaltlichen PM-Texts
 Halte dich exakt an diese Struktur:
@@ -32,7 +32,7 @@ Halte dich exakt an diese Struktur:
 2. Übertrage den Inhalt präzise ins Deutsche, ohne werbliche Zuspitzung.
 3. Erstelle den PM-Text exakt in der vorgegebenen Struktur.
 4. Lade anschließend zusätzlich die Gestaltungsvorgaben aus `preferences/pm-de-grauer-kasten/SKILL.md`.
-5. Binde das Logo aus `assets/MS LOGO.png` oben in die gestaltete Ausgabe ein.
+5. Binde das Logo aus `assets/acme-logo.png` oben in die gestaltete Ausgabe ein.
 6. Erzeuge das Endergebnis als eigenständige HTML-Datei.
 7. Erzeuge aus derselben gestalteten Ausgabe zusätzlich eine PDF-Datei.
 8. Lege beide Dateien im Ordner `/sites/CopilotCenter/MSGrauerKasten/output` ab.

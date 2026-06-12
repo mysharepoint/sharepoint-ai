@@ -24,7 +24,7 @@ am oberen Rand.
 ## Verwendete Dateien und Assets
 
 - Gestaltungsvorgabe: `preferences/pm-de-grauer-kasten/SKILL.md`
-- Logo: `assets/MS LOGO.png`
+- Logo: `assets/acme-logo.png`
 - Ausgabeziel: `/sites/CopilotCenter/MSGrauerKasten/output`
 
 ## Wann verwenden
@@ -55,7 +55,7 @@ Vor Anwendung des Layouts müssen diese Inhaltsbausteine vorliegen:
 
 1. Übernimm den bereits erzeugten PM-Inhalt unverändert in seiner Aussage.
 2. Wende das definierte Layout auf diesen Inhalt an.
-3. Binde `assets/MS LOGO.png` oberhalb der Überschrift als Logo ein.
+3. Binde `assets/acme-logo.png` oberhalb der Überschrift als Logo ein.
 4. Erzeuge eine eigenständige **HTML-Datei**.
 5. Erzeuge zusätzlich aus derselben gestalteten Ausgabe eine **PDF-Datei**.
 6. Speichere **beide Dateien** im Ordner `/sites/CopilotCenter/MSGrauerKasten/output`.
@@ -75,7 +75,7 @@ Vor Anwendung des Layouts müssen diese Inhaltsbausteine vorliegen:
 
 - Keine Inhalte ergänzen oder umschreiben, die nicht aus dem Hauptskill kommen
 - Kein anderes Design verwenden
-- Das Logo muss aus `assets/MS LOGO.png` referenziert werden
+- Das Logo muss aus `assets/acme-logo.png` referenziert werden
 - Ausgabe immer als **HTML und PDF**
 - Ablage immer in `/sites/CopilotCenter/MSGrauerKasten/output`
 - Wenn die PDF-Erzeugung fehlschlägt, HTML trotzdem erzeugen und den Fehler offen benennen
